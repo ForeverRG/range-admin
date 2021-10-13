@@ -1,5 +1,6 @@
 import { RangeRequest } from './request'
 
+// 导出axios实例
 export const rangeRequest = new RangeRequest({
   baseURL: process.env.VUE_APP_BASE_URL,
   timeout: 10000,

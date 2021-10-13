@@ -3,24 +3,26 @@ import 'element-plus/dist/index.css'
 
 import {
   ElButton,
-  ElTable,
-  ElAlert,
-  ElAside,
-  ElAutocomplete,
-  ElAvatar,
-  ElBacktop,
-  ElBadge
+  ElCheckbox,
+  ElForm,
+  ElFormItem,
+  ElIcon,
+  ElInput,
+  ElLink,
+  ElTabPane,
+  ElTabs
 } from 'element-plus'
 
 const components = [
   ElButton,
-  ElTable,
-  ElAlert,
-  ElAside,
-  ElAutocomplete,
-  ElAvatar,
-  ElBacktop,
-  ElBadge
+  ElTabs,
+  ElTabPane,
+  ElIcon,
+  ElInput,
+  ElForm,
+  ElFormItem,
+  ElLink,
+  ElCheckbox
 ]
 
 // 注册element组件

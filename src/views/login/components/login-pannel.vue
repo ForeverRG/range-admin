@@ -2,15 +2,15 @@
   <div class="login-pannel">
     <div class="login-title">用 户 登 录</div>
 
-    <el-tabs type="border-card" stretch>
-      <el-tab-pane>
+    <el-tabs v-model="activeName" type="border-card" stretch>
+      <el-tab-pane name="accountLoginPane">
         <template #label>
           <span><i class="el-icon-user"></i> 账号登录</span>
         </template>
         <login-account ref="loginAccountRef"></login-account>
       </el-tab-pane>
 
-      <el-tab-pane>
+      <el-tab-pane name="phoneLoginPane">
         <template #label>
           <span><i class="el-icon-mobile-phone"></i> 手机登录</span>
         </template>
@@ -46,6 +46,7 @@ export default defineComponent({
   },
 
   setup() {
+    const activeName = ref('accountLoginPane')
     const loginAccountRef = ref<InstanceType<typeof LoginAccount>>()
     const loginPhoneRef = ref<InstanceType<typeof LoginPhone>>()
     const isRemember = ref(true)
@@ -60,13 +61,23 @@ export default defineComponent({
 
     // 登录
     function handleLoginClick() {
-      // 账号登录
-      loginAccountRef.value?.loginAction()
-      // 手机登录
-      loginPhoneRef.value?.loginAction()
+      if (activeName.value === 'accountLoginPane') {
+        // 账号登录
+        loginAccountRef.value?.loginAction()
+      } else {
+        // 手机登录
+        loginPhoneRef.value?.loginAction()
+      }
     }
 
-    return { loginAccountRef, loginPhoneRef, handleLoginClick, handleResetClick, isRemember }
+    return {
+      activeName,
+      loginAccountRef,
+      loginPhoneRef,
+      handleLoginClick,
+      handleResetClick,
+      isRemember
+    }
   }
 })
 </script>

@@ -29,7 +29,7 @@ class RangeRequest {
 
     // 公有实例响应拦截器
     this.instance.interceptors.response.use(
-      (res) => res,
+      (res) => res.data,
       (err) => err
     )
   }

@@ -22,6 +22,6 @@ export function getUserInfoByIdRequest(userId: number): Promise<IResponseDataTyp
 // 根据角色id获取用户菜单
 export function getUserMenusByRoleIdRequest(roleId: number): Promise<IResponseDataType> {
   return rangeRequest.get<IResponseDataType>({
-    url: LoginApi.UserMenus + roleId
+    url: LoginApi.UserMenus + roleId + '/menu'
   })
 }

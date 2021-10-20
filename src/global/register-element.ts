@@ -2,13 +2,21 @@ import { App } from 'vue'
 import 'element-plus/dist/index.css'
 
 import {
+  ElAside,
   ElButton,
   ElCheckbox,
+  ElContainer,
   ElForm,
   ElFormItem,
+  ElHeader,
   ElIcon,
   ElInput,
   ElLink,
+  ElMain,
+  ElMenu,
+  ElMenuItem,
+  ElMenuItemGroup,
+  ElSubMenu,
   ElTabPane,
   ElTabs
 } from 'element-plus'
@@ -22,7 +30,16 @@ const components = [
   ElForm,
   ElFormItem,
   ElLink,
-  ElCheckbox
+  ElCheckbox,
+  ElContainer,
+  ElAside,
+  ElHeader,
+  ElAside,
+  ElMain,
+  ElMenu,
+  ElMenuItem,
+  ElSubMenu,
+  ElMenuItemGroup
 ]
 
 // 注册element组件

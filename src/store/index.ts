@@ -1,6 +1,6 @@
-import { createStore } from 'vuex'
+import { createStore, Store, useStore } from 'vuex'
 import { loginModule } from './login/login'
-import { IRootState } from './type'
+import { IRootState, IStoreType } from './type'
 
 export const store = createStore<IRootState>({
   state() {
@@ -18,4 +18,9 @@ export const store = createStore<IRootState>({
 
 export function setupStore(): void {
   store.dispatch('loginModule/loadLoginDataFromLocalStorage')
+}
+
+// 使用带有模块类型的store
+export function userRangeStore(): Store<IStoreType> {
+  return useStore()
 }

@@ -1,3 +1,4 @@
+import { IBreadcrumb } from '@/base-ui/breadcrumb'
 import { IUserMenu } from '@/store/login/type'
 import { RouteRecordRaw } from 'vue-router'
 
@@ -34,16 +35,30 @@ export function mapMenusToRoutes(userMenus: IUserMenu[]): RouteRecordRaw[] {
 }
 
 // 根据路径匹配到菜单项
-export function pathMapToMenu(userMenus: IUserMenu[], currentPath: string): IUserMenu | undefined {
+export function pathMapToMenu(
+  userMenus: IUserMenu[],
+  currentPath: string,
+  breadcrumbs?: IBreadcrumb[]
+): IUserMenu | undefined {
   for (const menu of userMenus) {
     if (menu.url === currentPath) {
+      breadcrumbs?.push({ name: menu.name, path: menu.url })
       return menu
     } else {
       // 存在二级菜单
       const findMenu = pathMapToMenu(menu.children ?? [], currentPath)
       if (findMenu) {
+        breadcrumbs?.push({ name: menu.name })
+        breadcrumbs?.push({ name: findMenu.name, path: findMenu.url })
         return findMenu
       }
     }
   }
+}
+
+// 根据路径匹配面包屑
+export function pathMapToBreadcrumb(userMenus: IUserMenu[], currentPath: string): IBreadcrumb[] {
+  const breadcrumbs: IBreadcrumb[] = []
+  pathMapToMenu(userMenus, currentPath, breadcrumbs)
+  return breadcrumbs
 }

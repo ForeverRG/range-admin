@@ -3,6 +3,9 @@ import 'element-plus/dist/index.css'
 
 import {
   ElAside,
+  ElAvatar,
+  ElBreadcrumb,
+  ElBreadcrumbItem,
   ElButton,
   ElCheckbox,
   ElContainer,
@@ -38,7 +41,10 @@ const components = [
   ElMenu,
   ElMenuItem,
   ElSubMenu,
-  ElMenuItemGroup
+  ElMenuItemGroup,
+  ElAvatar,
+  ElBreadcrumb,
+  ElBreadcrumbItem
 ]
 
 // 注册element组件

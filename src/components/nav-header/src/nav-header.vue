@@ -11,9 +11,11 @@
       </div>
       <div class="right-content">
         <el-avatar
+          class="right-avatar"
           size="small"
           src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
         ></el-avatar>
+        <user-info />
       </div>
     </div>
   </div>
@@ -21,14 +23,16 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue'
-import RangeBreadcrumb from '@/base-ui/breadcrumb/index'
 import { useRoute } from 'vue-router'
 import { userRangeStore } from '@/store'
+import RangeBreadcrumb from '@/base-ui/breadcrumb/index'
+import UserInfo from './user-info.vue'
 import { pathMapToBreadcrumb } from '@/utils/menu/map-menu'
 
 export default defineComponent({
   components: {
-    RangeBreadcrumb
+    RangeBreadcrumb,
+    UserInfo
   },
   emits: ['foldChange'],
   setup(props, { emit }) {
@@ -78,6 +82,15 @@ export default defineComponent({
       display: flex;
       flex-flow: row nowrap;
       align-items: center;
+    }
+
+    .right-content {
+      display: flex;
+      flex-flow: row nowrap;
+    }
+
+    .right-avatar {
+      margin-right: 10px;
     }
   }
 

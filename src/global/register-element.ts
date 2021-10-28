@@ -9,6 +9,9 @@ import {
   ElButton,
   ElCheckbox,
   ElContainer,
+  ElDropdown,
+  ElDropdownItem,
+  ElDropdownMenu,
   ElForm,
   ElFormItem,
   ElHeader,
@@ -44,7 +47,10 @@ const components = [
   ElMenuItemGroup,
   ElAvatar,
   ElBreadcrumb,
-  ElBreadcrumbItem
+  ElBreadcrumbItem,
+  ElDropdown,
+  ElDropdownMenu,
+  ElDropdownItem
 ]
 
 // 注册element组件

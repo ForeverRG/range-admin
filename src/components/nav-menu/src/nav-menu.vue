@@ -3,13 +3,13 @@
     <!-- logo start -->
     <div class="logo">
       <img class="logo-img" src="~@/assets/img/logo.png" alt="logo" />
-      <span class="logo-title">Range Admin</span>
+      <span v-show="!isCollapse" class="logo-title">Range Admin</span>
     </div>
     <!-- logo end -->
 
     <!-- menu start -->
     <el-menu
-      default-active="2"
+      :default-active="activeMenuId + ''"
       class="el-menu-vertical"
       :collapse="isCollapse"
       background-color="#0c2135"
@@ -19,14 +19,16 @@
       <template v-for="menu in userMenus" :key="menu.id">
         <!-- 一级菜单 -->
         <template v-if="menu.type === 1">
-          <el-sub-menu :index="menu.id">
+          <el-sub-menu :index="menu.id + ''">
             <template #title>
               <i class="el-icon-location"></i>
               <span>{{ menu.name }}</span>
             </template>
             <!-- 一级菜单中的二级菜单  -->
             <template v-for="childMenu in menu.children" :key="childMenu.id">
-              <el-menu-item :index="childMenu.id">{{ childMenu.name }}</el-menu-item>
+              <el-menu-item :index="childMenu.id + ''" @click="handleMenuItemClick(childMenu)">{{
+                childMenu.name
+              }}</el-menu-item>
             </template>
           </el-sub-menu>
         </template>
@@ -44,9 +46,11 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 
 import { userRangeStore } from '@/store'
+import { pathMapToMenu } from '@/utils/menu/map-menu'
+import { useRoute, useRouter } from 'vue-router'
 
 export default defineComponent({
   props: {
@@ -60,8 +64,21 @@ export default defineComponent({
     const rangeStore = userRangeStore()
     const userMenus = computed(() => rangeStore.state.loginModule.userMenus)
 
+    const router = useRouter()
+    const handleMenuItemClick = (item: any) => {
+      if (item.url) {
+        router.push({
+          path: item.url ?? '/not-found'
+        })
+      }
+    }
+
+    const route = useRoute()
+    const activeMenuId = ref(pathMapToMenu(userMenus.value, route.path)?.id)
     return {
-      userMenus
+      userMenus,
+      handleMenuItemClick,
+      activeMenuId
     }
   }
 })
@@ -86,6 +103,7 @@ export default defineComponent({
     }
 
     .logo-title {
+      line-height: 28px;
       font-size: 16px;
       font-weight: 700;
       color: white;

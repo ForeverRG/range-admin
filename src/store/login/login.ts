@@ -6,9 +6,10 @@ import {
 } from '@/service/login/login'
 import { IAccount } from '@/service/login/type'
 import { cacheHelper } from '@/utils'
+import { mapMenusToRoutes } from '@/utils/menu/map-menu'
 import { Module } from 'vuex'
 import { IRootState } from '../type'
-import { ILoginState } from './type'
+import { ILoginState, IUserMenu } from './type'
 
 export const loginModule: Module<ILoginState, IRootState> = {
   namespaced: true,
@@ -32,6 +33,12 @@ export const loginModule: Module<ILoginState, IRootState> = {
     },
     setUserMenus(state, userMenus: any) {
       state.userMenus = userMenus
+
+      // 根据用户菜单动态加载路由
+      const routes = mapMenusToRoutes(userMenus as IUserMenu[])
+      routes.forEach((route) => {
+        router.addRoute('main', route)
+      })
     }
   },
 
@@ -51,9 +58,10 @@ export const loginModule: Module<ILoginState, IRootState> = {
       // 3.根据角色id获取用户菜单
       const userMenus = (await getUserMenusByRoleIdRequest(userInfo.role.id)).data
       commit('setUserMenus', userMenus)
+
       cacheHelper.setCache('userMenus', userMenus)
 
-      // 4.跳转路由
+      // 5.跳转路由
       router.push('/main')
     },
 

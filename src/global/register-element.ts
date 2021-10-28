@@ -34,7 +34,6 @@ const components = [
   ElContainer,
   ElAside,
   ElHeader,
-  ElAside,
   ElMain,
   ElMenu,
   ElMenuItem,
